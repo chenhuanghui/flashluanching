@@ -264,7 +264,7 @@ function getLastestPhotos(){
     $.get( domain+"image?sort=createdAt%20DESC")
     .done(function(data) {
         for(var i=0; i<data.length; i++){
-            $("#grid").append('<li><figure class="effect-zoe"><a href="entry.html?id='+data[i].id+'"><img src="'+data[i].url+'"/><a/><figcaption><h2 style="font-size:20px;max-width=165px;">'+data[i].owner.name+'</h2><p class="icon-links"><a href="#"><span class="icon-heart"></span></a><a href="#"><span class="icon-eye"></span></a><a href="#"><span class="icon-paper-clip"></span></a></p><p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p></figcaption></figure></li>');
+            $("#grid").append('<li><figure class="effect-zoe"><a href="entry.html?id='+data[i].id+'"><img src="'+data[i].url+'"/><a/><figcaption><h2 style="font-size:20px;max-width=165px;">'+data[i].owner.name+'</h2><p class="icon-links"><a href="#"><span class="icon-heart"></span></a><a href="#"><span class="icon-eye"></span></a><a href="#"><span class="icon-paper-clip"></span></a></p><p class="description"><a href="entry.html?id='+data[i].id+'">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</a></p></figcaption></figure></li>');
         }
         new GridScrollFx( document.getElementById( 'grid' ), {
             viewportFactor : 0.4
@@ -281,7 +281,7 @@ function getTopPhotops(){
     $.get( domain+"image?sort=voteCount%20DESC")
     .done(function(data) {
         for(var i=0; i<data.length; i++){
-            $("#grid").append('<li><figure class="effect-zoe"><a href="entry.html?id='+data[i].id+'"><img src="'+data[i].url+'"/><a/><figcaption><h2>'+data[i].owner.name+'</h2><p class="icon-links"><a href="#"><span class="icon-heart"></span></a><a href="#"><span class="icon-eye"></span></a><a href="#"><span class="icon-paper-clip"></span></a></p><p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p></figcaption></figure></li>');
+            $("#grid").append('<li><figure class="effect-zoe"><a href="entry.html?id='+data[i].id+'"><img src="'+data[i].url+'"/><a/><figcaption><h2>'+data[i].owner.name+'</h2><p class="icon-links"><a href="#"><span class="icon-heart"></span></a><a href="#"><span class="icon-eye"></span></a><a href="#"><span class="icon-paper-clip"></span></a></p><p class="description"><a href="entry.html?id='+data[i].id+'">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</a></p></figcaption></figure></li>');
         }
         new GridScrollFx( document.getElementById( 'grid' ), {
             viewportFactor : 0.4
