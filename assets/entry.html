@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css"> -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+    <!-- <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "http://connect.facebook.net/en_US/sdk.js#xfbml=1&appId=642818172421223&version=v2.0";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script> -->
+
+
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+
+    <!-- Start Register Button -->
+    <input type="image" id="ip-login-register" class="register-btn visible-md-block visible-lg-block" src="img/RegisterBtn.png" width="242" height="50" data-toggle="modal" data-target="#loginForm"/>
+    <input type="image" id="ip-logout" class="register-btn visible-md-block visible-lg-block" src="img/Login.png" width="242" height="50" data-toggle="modal" style="display: none !important;"/>
+    <input type="image" class="register-btn btn-small visible-xs-block visible-sm-block" src="img/SmRegisterBtn.png" width="58" height="50" data-toggle="modal" data-target="#loginForm"/>
+    <!-- End Register Button -->
+
+    <!-- Start Register Form -->
+    <div class="modal fade" id="registerForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h2 class="register-form-title">Đăng ký tài khoản </h2><h1 class="register-form-title"> Flash</h1>
+          </div>
+          <div class="modal-body">
+            <form role="form">
+              <div class="form-group col-md-6">
+                <label for="rfname" class="control-label sr-only">Fullname</label>
+                <input type="text" class="form-control" id="fname" placeholder="Họ và Tên">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="dob" class="control-label sr-only">Date of birth</label>
+                <input type="text" class="form-control" id="dob" placeholder="Ngày sinh" onfocus="(this.type='date')">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="email" class="control-label sr-only">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Email">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="gender" class="control-label sr-only">Gender</label>
+                <select class="form-control" id="gender">
+                  <option disabled selected>Giới tính</option>
+                  <option>Nam</option>
+                  <option>Nữ</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="password" class="control-label sr-only">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Mật khẩu">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="phone" class="control-label sr-only">Phone number</label>
+                <input type="tel" class="form-control" id="phone" placeholder="Số điện thoại">
+              </div>
+              <img class="form-divider" src="img/FormDivider.png"/>
+              <!-- <input class="fb-login" type="image" src="img/FbLoginBtn.png" /> -->
+              <div id="fb-root"></div>
+              <div class="fb-login">
+                <a href="#" onclick="loginFB(1);">
+                  <img src="img/FbLoginBtn.png" />
+                </a>
+              </div>              
+              <div class="radio" style="text-align: center">
+                <label><input type="radio" name="agree-tou">Bạn đồng ý với các <a href="#">điều kiện & điều khoản</a> của chương trình</label>
+              </div>
+              <div style="padding: 30px;">
+                <button type="button" class="custom-btn lg-btn">Đăng ký</button>
+              </div>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Register Form -->
+
+    <!-- Start Login Form -->
+    <div class="modal fade" id="loginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h2 class="register-form-title">Đăng nhập tài khoản </h2><h1 class="register-form-title"> Flash</h1>
+          </div>
+          <div class="modal-body">
+            <form role="form">
+              <div class="form-group col-md-6 col-md-offset-3">
+                <label for="email" class="control-label sr-only">Email</label>
+                <input type="email" class="form-control" id="loginEmail" placeholder="Email">
+              </div>
+              <div class="clearfix"></div>
+              <div class="form-group col-md-6 col-md-offset-3">
+                <label for="password" class="control-label sr-only">Password</label>
+                <input type="password" class="form-control" id="loginPassword" placeholder="Mật khẩu">
+              </div>
+              <div class="clearfix"></div>
+              <p id="login-form-message" class="form-message"></p>
+              <button type="button" class="custom-btn lg-btn" id="loginBtn">Đăng nhập</button>
+              <img class="form-divider" src="img/FormDivider.png"/>
+              <!-- <input class="fb-login" type="image" src="img/FbLoginBtn.png" /> -->
+              <div class="fb-login">
+                <a href="#" onclick="loginFB(2);">
+                  <img src="img/FbLoginBtn.png" />
+                </a>
+              </div>
+              <div style="text-align: center">
+                <label>Chưa có tài khoản? <a href="" data-dismiss="modal" data-toggle="modal" data-target="#registerForm" >ĐĂNG KÝ</a></label>
+              </div>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Login Form -->
+
+    <!-- Start Edit Profile Form -->
+    <div class="modal fade" id="profileForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h2 class="register-form-title">Thay đổi thông tin cá nhân </h2><h1 class="register-form-title"> Phương</h1>
+          </div>
+          <div class="modal-body">
+            <form role="form">
+              <div class="form-group col-md-6">
+                <label for="rfname" class="control-label sr-only">Fullname</label>
+                <input type="text" class="form-control" id="edit-fname" placeholder="Họ và Tên">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="opwd" class="control-label sr-only">Old password</label>
+                <input type="password" class="form-control" id="edit-opwd" placeholder="Mật khẩu cũ">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="email" class="control-label sr-only">Email</label>
+                <input type="email" class="form-control" id="edit-email" placeholder="Email">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="npwd" class="control-label sr-only">New password</label>
+                <input type="password" class="form-control" id="edit-npwd" placeholder="Mật khẩu mới">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="phone" class="control-label sr-only">Phone number</label>
+                <input type="tel" class="form-control" id="edit-phone" placeholder="Số điện thoại">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="cfpwd" class="control-label sr-only">Confirm password</label>
+                <input type="password" class="form-control" id="edit-cfpwd" placeholder="Xác nhận mật khẩu">
+              </div>
+              <img class="form-divider" src="img/FormDivider.png"/>
+              <!-- <input class="fb-login" type="image" src="img/FbLoginBtn.png" /> -->
+              <div class="fb-login">
+                <a href="#" onclick="loginFB(3);">
+                  <img src="img/FbLoginBtn.png" />
+                </a>
+              </div>
+              <div style="padding: 30px;">
+                <p id="update-profile-form-message" class="form-message"></p>
+                <button type="button" class="custom-btn lg-btn" id="updateProfileBtn">Lưu thay đổi</button>
+              </div>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Edit Profile Form -->
+
+    <!-- Start HEADER -->
+    <div class="header container-fluid">
+      <div class="col-md-12 visible-md-block visible-lg-block">
+        <img class="col-md-2 col-md-offset-4" src="img/Logo.png" />
+      </div>
+      <div class="col-md-6 col-md-offset-6 visible-md-block visible-lg-block">
+        <div class="col-md-12">
+          <button class="custom-btn nav-btn">Flash You!</button>
+          <button class="custom-btn nav-btn">Cuộc thi</button>
+          <button class="custom-btn nav-btn">Alcatel Flash</button>
+        </div>
+        <div class="clearfix"></div>
+        </div>
+      </div>
+      <div class="visible-xs-block visible-sm-block" style="padding-top: 10px;">
+        <div class="col-xs-2">
+          <input class="menu" type="image" src="img/MenuBtn.png" width="100%" height="100%" />
+        </div>
+        <div class="col-xs-5 col-xs-offset-2 row-centered">
+          <img src="img/Logo.png" width="100%" height="100%"/>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    <!-- End HEADER -->
+
+    <!-- Start CONTEST INTRODUCTION-->
+    <div class="container-fluid light-gray-bg" style="margin: 45px 0;">
+      <div class="col-md-6">
+        <img class="img-responsive align-right" src="img/3.jpg" />
+      </div>
+      <div class="col-md-6 align-center">
+        <div class="row">
+
+          <h4 class="col-xs-7">
+            <img class="avatar-sm" width="50" height="50" src="img/3.jpg" />
+            Phương Hoàng</h4>
+          <div class="col-xs-5">
+
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <p>Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+        </div>
+        <div class="fb-comments" data-href="http://localhost/image/id" data-numposts="5" data-colorscheme="light"></div>
+      </div>
+    </div>
+    <!-- End CONTEST INTRODUCTION -->
+
+    <footer>
+      <p class="text-right">Copyright Alcatel 2014. All rights reserved.</p>
+    </footer>
+
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        init();
+
+        var name = getCookie("name");
+        if(name !== undefined)
+        {
+          $("#ip-login-register").hide();
+          $("#ip-logout").show();
+        } 
+      });
+    </script>
+    </body>
+</html>

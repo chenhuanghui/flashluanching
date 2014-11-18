@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css"> -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+
+    <!-- Start Register Button -->
+    <input type="image" id="ip-login-register" class="register-btn visible-md-block visible-lg-block" src="img/RegisterBtn.png" width="242" height="50" data-toggle="modal" data-target="#loginForm"/>
+    <input type="image" id="ip-logout" class="register-btn visible-md-block visible-lg-block" src="img/Login.png" width="242" height="50" data-toggle="modal" style="display: none !important;"/>
+    <input type="image" class="register-btn btn-small visible-xs-block visible-sm-block" src="img/SmRegisterBtn.png" width="58" height="50" data-toggle="modal" data-target="#loginForm"/>
+    <!-- End Register Button -->
+
+    <!-- Start Register Form -->
+    <div class="modal fade" id="registerForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow-y: auto;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h2 class="form-title">Đăng ký tài khoản </h2><h1 class="form-title"> Flash</h1>
+          </div>
+          <div class="modal-body">
+            <form role="form">
+              <div class="form-group col-md-6">
+                <label for="rfname" class="control-label sr-only">Fullname</label>
+                <input type="text" class="form-control" id="fname" placeholder="Họ và Tên">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="dob" class="control-label sr-only">Date of birth</label>
+                <input type="text" class="form-control" id="dob" placeholder="Ngày sinh" onfocus="(this.type='date')">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="email" class="control-label sr-only">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Email">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="gender" class="control-label sr-only">Gender</label>
+                <select class="form-control" id="gender">
+                  <option disabled selected>Giới tính</option>
+                  <option value="true">Nam</option>
+                  <option value="false">Nữ</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="password" class="control-label sr-only">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Mật khẩu">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="phone" class="control-label sr-only">Phone number</label>
+                <input type="tel" class="form-control" id="phone" placeholder="Số điện thoại">
+              </div>
+              <input type="hidden" class="form-control" id="fbId" value="">
+              <img class="form-divider" src="img/FormDivider.png"/>
+              <!-- <input class="fb-login" type="image" src="img/FbLoginBtn.png" /> -->
+              <div id="fb-root"></div>
+              <div class="fb-login">
+                <a href="#" onclick="loginFB(1);">
+                  <img src="img/FbLoginBtn.png" />
+                </a>
+              </div>
+              <div class="radio" style="text-align: center">
+                <label><input type="radio" name="agree-tou" id="agree-tou">Bạn đồng ý với các <a href="#">điều kiện & điều khoản</a> của chương trình</label>
+              </div>
+              <div style="padding: 30px;">
+                <p id="register-form-message" class="form-message"></p>
+                <button type="button" class="custom-btn lg-btn" id="registerBtn">Đăng ký</button>
+              </div>
+              <div style="text-align: center">
+                <label>Đã có tài khoản? <a href="" data-dismiss="modal" data-toggle="modal" data-target="#loginForm" >ĐĂNG NHẬP</a></label>
+              </div>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Register Form -->
+
+    <!-- Start Login Form -->
+    <div class="modal fade" id="loginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow-y: auto;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h2 class="form-title">Đăng nhập tài khoản </h2><h1 class="form-title"> Flash</h1>
+          </div>
+          <div class="modal-body">
+            <form role="form">
+              <div class="form-group col-md-6 col-md-offset-3">
+                <label for="email" class="control-label sr-only">Email</label>
+                <input type="email" class="form-control" id="loginEmail" placeholder="Email">
+              </div>
+              <div class="clearfix"></div>
+              <div class="form-group col-md-6 col-md-offset-3">
+                <label for="password" class="control-label sr-only">Password</label>
+                <input type="password" class="form-control" id="loginPassword" placeholder="Mật khẩu">
+              </div>
+              <div class="clearfix"></div>
+              <p id="login-form-message" class="form-message"></p>
+              <button type="button" class="custom-btn lg-btn" id="loginBtn">Đăng nhập</button>
+              <img class="form-divider" src="img/FormDivider.png"/>
+              <!-- <input class="fb-login" type="image" src="img/FbLoginBtn.png" /> -->
+              <div class="fb-login">
+                <a href="#" onclick="loginFB(2);">
+                  <img src="img/FbLoginBtn.png" />
+                </a>
+              </div>
+              <div style="text-align: center">
+                <label>Chưa có tài khoản? <a href="" data-dismiss="modal" data-toggle="modal" data-target="#registerForm" >ĐĂNG KÝ</a></label>
+              </div>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Login Form -->
+
+    <!-- Start Edit Profile Form -->
+    <div class="modal fade" id="profileForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h2 class="form-title">Thay đổi thông tin cá nhân </h2><h1 class="form-title fullname"></h1>
+          </div>
+          <div class="modal-body">
+            <form role="form">
+              <div class="form-group col-md-6">
+                <label for="rfname" class="control-label sr-only">Fullname</label>
+                <input type="text" class="form-control" id="edit-fname" placeholder="Họ và Tên">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="opwd" class="control-label sr-only">Old password</label>
+                <input type="password" class="form-control" id="edit-opwd" placeholder="Mật khẩu cũ">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="email" class="control-label sr-only">Email</label>
+                <input type="email" class="form-control" id="edit-email" placeholder="Email">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="npwd" class="control-label sr-only">New password</label>
+                <input type="password" class="form-control" id="edit-npwd" placeholder="Mật khẩu mới">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="phone" class="control-label sr-only">Phone number</label>
+                <input type="tel" class="form-control" id="edit-phone" placeholder="Số điện thoại">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="cfpwd" class="control-label sr-only">Confirm password</label>
+                <input type="password" class="form-control" id="edit-cfpwd" placeholder="Xác nhận mật khẩu">
+              </div>
+              <img class="form-divider" src="img/FormDivider.png"/>
+              <!-- <input class="fb-login" type="image" src="img/FbLoginBtn.png" /> -->
+              <div class="fb-login">
+                <a href="#" onclick="loginFB(3);">
+                  <img src="img/FbLoginBtn.png" />
+                </a>
+              </div>
+              <div style="padding: 30px;">
+                <p id="update-profile-form-message" class="form-message"></p>
+                <button type="button" class="custom-btn lg-btn" id="updateProfileBtn">Lưu thay đổi</button>
+              </div>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Edit Profile Form -->
+
+    <!-- Start HEADER -->
+    <div class="header container-fluid">
+      <div class="col-md-12 visible-md-block visible-lg-block">
+        <img class="col-md-2 col-md-offset-4" src="img/Logo.png" />
+      </div>
+      <div class="col-md-6 col-md-offset-6 visible-md-block visible-lg-block">
+        <div class="col-md-12">
+          <button class="custom-btn nav-btn">Flash You!</button>
+          <button class="custom-btn nav-btn">Cuộc thi</button>
+          <button class="custom-btn nav-btn">Alcatel Flash</button>
+        </div>
+        <div class="clearfix"></div>
+        </div>
+      </div>
+      <div class="visible-xs-block visible-sm-block" style="padding-top: 10px;">
+        <div class="col-xs-2">
+          <input class="menu" type="image" src="img/MenuBtn.png" width="100%" height="100%" />
+        </div>
+        <div class="col-xs-5 col-xs-offset-2 row-centered">
+          <img src="img/Logo.png" width="100%" height="100%"/>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    <!-- End HEADER -->
+
+    <!-- Start CONTEST INTRODUCTION-->
+    <div class="container-fluid light-gray-bg row-centered" id="contest-introduction">
+      <div class="col-md-6 vertical-center" id="levitation-text">
+        <div class="col-md-8 col-centered">
+          <h2 class="text-right">Thể hiện <em>CÁ TÍNH</em></h2>
+          <h2 class="text-right">Nhận quà hấp dẫn</h2>
+          <button class="custom-btn lg-btn" style="display:block; margin-right: 0;">Tham gia ngay</button>
+          <br/>
+          <p class="text-right">
+            Cơ hội sở hữu ALCATEL FLASH và nhiều phần quà giá trị khi tham gia
+            cuộc thi
+          </p>
+          <h4 class="text-right">
+            LAY ĐỘNG <em>GIÁC QUAN</em>
+          </h4>
+          <h4 class="text-right">
+            BẬT TUNG <em>CÁ TÍNH</em>
+          </h4>
+        </div>
+      </div><!--
+    --><div class="col-md-6 vertical-center">
+        <img class="img-responsive" src="img/Levitation.png" />
+      </div>
+
+      <div class="col-xs-12">
+        <input type="image" class="scroll-down" src="img/ScrollBtn.png" width="100" height="100" />
+      </div>
+    </div>
+    <!-- End CONTEST INTRODUCTION -->
+
+    <!-- Start LOGIN INFO -->
+    <div class="container-fluid light-gray-bg row-centered login-info-section">
+      <div class="col-md-6 vertical-center" id="levitation-text">
+        <div class="col-md-8 col-centered">
+          <h2 class="text-right">Xin chào</h2>
+          <h1 class="text-right fullname"></h1>
+          <button class="custom-btn blue-btn" style="display:block; margin-right: 0;">Đổi thông tin cá nhân</button>
+        </div>
+      </div><!--
+    --><div class="col-md-6 vertical-center">
+        <img class="avatar" width="200" height="200" src="img/3.jpg" />
+      </div>
+    </div>
+    <!-- End LOGIN INFO -->
+
+    <!-- Start CONTEST Step1-->
+    <div class="container-fluid light-gray-bg row-centered step1-section" id="step1-section">
+      <div class="col-md-6 vertical-center" id="levitation-text">
+        <div class="col-md-8 col-centered">
+          <h1 class="text-right">BƯỚC 1</h1>
+          <h2 class="text-right">CHỌN HÌNH ẢNH</h2>
+          <p class="text-right">
+            Hãy chọn hình ảnh không trọng lượng của bạn (png, gif, jpg). Dung lượng tối đa 20MB
+          </p>
+          <!-- <button class="custom-btn blue-btn" style="display:block; margin-right: 0;">Tải ảnh lên</button>
+          <button class="custom-btn blue-btn" style="display:block; margin-right: 0;">Chọn ảnh từ Facebook</button> -->
+          <form role="form">
+            <div class="form-group">
+              <input type="file" class="form-control" id="image-input" placeholder="Tải ảnh lên">
+            </div>
+          </form>
+        </div>
+      </div><!--
+    --><div class="col-md-6 vertical-center">
+        <img class="visible-md-block visible-lg-block" src="img/Step1.png" />
+        <input type="image" class="next-btn" id="toStep2" src="img/NextBtn.png" width="100" height="100" />
+      </div>
+
+      <div class="col-xs-12">
+        <input type="image" class="scroll-down" src="img/ScrollBtn.png" width="100" height="100" />
+      </div>
+    </div>
+    <!-- End CONTEST Step1 -->
+
+    <!-- Start CONTEST Step2-->
+    <div class="container-fluid light-gray-bg row-centered step2-section" id="step2-section">
+      <div class="col-md-6 vertical-center" id="levitation-text">
+        <div class="col-md-8 col-centered">
+          <h1 class="text-right">BƯỚC 2</h1>
+          <h2 class="text-right">HOÀN THIỆN</h2>
+          <p class="text-right">
+            Nhập nội dung
+          </p>
+          <textarea class="form-control" id="image-caption" rows="3"></textarea>
+          <p class="text-right">
+            Lựa chọn hiệu ứng theo sở thích cá nhân và kể về tác phẩm của bạn
+          </p>
+        </div>
+      </div><!--
+    --><div class="col-md-6 vertical-center">
+        <div class="filter-frame">
+          <div class="filter-wrapper" id="filter-wrapper">
+            <div class="filtered-img-wrapper" id="filtered-img-wrapper">
+              <img id="filtered-img" src="img/test.png" />
+            </div>
+            <div class="filter-choser" id="filter-choser">
+              <a href="#" id="None"><img src="img/None.jpg" /></a>
+              <a href="#" id="Bright"><img src="img/Bright.png" /></a>
+              <a href="#" id="BW"><img src="img/BW.png" /></a>
+              <a href="#" id="Sepia"><img src="img/Sepia.png" /></a>
+              <a href="#" id="MultiplyBlue"><img src="img/BMul.png" /></a>
+              <a href="#" id="MultiplyYellow"><img src="img/YMul.png" /></a>
+              <a href="#" id="DoutoneBlue"><img src="img/BDou.png" /></a>
+              <a href="#" id="DoutoneYellow"><img src="img/YDou.png" /></a>
+            </div>
+          </div>
+        </div>
+        <input type="image" class="next-btn" id="toStep3" src="img/NextBtn.png" width="100" height="100" />
+      </div>
+
+      <div class="col-xs-12">
+        <input type="image" class="scroll-down" src="img/ScrollBtn.png" width="100" height="100" />
+      </div>
+    </div>
+    <!-- End CONTEST Step2 -->
+
+    <img class="img-responsive cl-xs-12" id="loading" src="img/loading2.gif" style="display:none;"/>
+
+    <!-- Start CONTEST Step3-->
+    <div class="container-fluid light-gray-bg row-centered step3-section" id="step3-section">
+      <div class="col-md-6 vertical-center" id="levitation-text">
+        <div class="col-md-8 col-centered">
+          <h1 class="text-right">BƯỚC 3</h1>
+          <h2 class="text-right">CHIA SẺ TÁC PHẨM</h2>
+          <p class="text-right">
+            Hãy cho bạn bè hiểu hơn về cá tính của bạn bằng cách share tác phẩm
+            qua facebook với tag #FlashPhongCachCuaToi
+          </p>
+          <button class="custom-btn blue-btn" style="display:block; margin-right: 0;">Chia sẻ qua facebook</button>
+        </div>
+      </div><!--
+    --><div class="col-md-6 vertical-center">
+        <img class="visible-md-block visible-lg-block" src="img/Step3.png" />
+        <input type="image" class="next-btn" id="uploadImage" src="img/CompleteBtn.png" width="100" height="100" />
+      </div>
+
+      <div class="col-xs-12">
+        <input type="image" class="scroll-down" src="img/ScrollBtn.png" width="100" height="100" />
+      </div>
+    </div>
+    <!-- End CONTEST Step3 -->
+
+    <!-- Start VIDEO -->
+    <div class="container-fluid row-centered light-gray-bg" id="video-section">
+      <div class="col-md-12 visible-md-block visible-lg-block video-frame">
+        <img class="col-md-2 col-md-offset-8" src="img/Logo.png" />
+        <div class="clearfix"></div>
+        <div class="col-md-6 col-centered video-wrapper">
+          <iframe width="560" height="349" src="http://www.youtube.com/embed/n_dZNLr2cME?rel=0&hd=1" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="visible-xs-block visible-sm-block video-wrapper2">
+        <iframe width="560" height="349" src="http://www.youtube.com/embed/n_dZNLr2cME?rel=0&hd=1" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="col-md-12 row-centered">
+        <p>Video là một câu chuyện của một nhân viên văn phòng muốn khám phá bản thân mình</p>
+        <p><i><h4>LAY ĐỘNG <em>GIÁC QUAN</em> BẬT TUNG <em>CÁ TÍNH</em></h4></i></p>
+      </div>
+      <div class="col-xs-12">
+        <input type="image" class="scroll-down" src="img/ScrollBtn.png" width="100" height="100" />
+      </div>
+    </div>
+    <!-- End VIDEO -->
+
+    <!-- Start ORDER -->
+    <div class="container-fluid order-section">
+      <div class="row">
+        <img class="img-responsive col-md-4 visible-md-inline-block visible-lg-inline-block order-thumbnail" src="img/OneTouch.png" />
+        <div class="col-md-8 col-xs-12 col-sm-12 order-panel">
+          <div class="col-md-5 col-xs-12 col-sm-12">
+            <h3>ALCATEL FLASH</h3>
+            <p>Alcatel Idol Flash với những năng lực vượt trội, được thiết kế cá tính dành riêng cho mỗi cá nhân</p>
+          </div>
+          <div class="col-md-7 col-xs-12 col-sm-12">
+            <a href="/order.html"><button class="custom-btn lg-btn order-btn">Đặt hàng ngay</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End ORDER -->
+
+    <!-- Start CONTEST HEADER -->
+    <div class="container-fluid contest-header-section">
+      <div class="col-md-7 row-centered">
+        <div class="row">
+          <img class="col-xs-4 col-centered" src="img/logo.png" />
+        </div>
+        <div class="row">
+          <img class="img-responsive col-centered" src="img/Slogan.png" />
+        </div>
+        <div class="row">
+          <p class="col-md-10 col-md-offset-1 text-center">
+          Hãy thể hiện những phút thăng hoa của bản thân qua những hình ảnh với
+          phong cách không trọng lượng - levitation để bật tung cá tính của bạn
+          </p>
+        </div>
+
+        <a>THAM GIA NGAY</a>
+      </div>
+      <div class="col-md-5 contest-header-thumbnail">
+        <img class="img-responsive" src="img/OneTouchBack.png" />
+      </div>
+      </div>
+    </div>
+    <!-- End CONTEST HEADER -->
+
+    <!-- Start CONTEST GALLERY -->
+    <div class="container-fluid gallery-section grid-wrap">
+      <ul class="grid swipe-right" id="grid">
+        <li class="title-box">
+          <h2>
+            <a class="selected" onclick="getLatest()">Mới nhất</a>
+            <br/>
+            <a onclick="getTop()">Thích nhiều nhất</a>
+          </h2>
+        </li>
+        <!-- <li>
+          <figure class="effect-zoe">
+            <img src="img/1.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/2.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/3.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/4.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/5.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/6.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/7.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/8.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/test.png" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/10.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/11.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/13.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/13.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/14.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/15.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/16.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/17.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/18.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/19.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/20.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/21.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/22.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/23.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/24.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="effect-zoe">
+            <img src="img/25.jpg" alt="img25"/>
+            <figcaption>
+              <h2>Creative <span>Zoe</span></h2>
+              <p class="icon-links">
+                <a href="#"><span class="icon-heart"></span></a>
+                <a href="#"><span class="icon-eye"></span></a>
+                <a href="#"><span class="icon-paper-clip"></span></a>
+              </p>
+              <p class="description">Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
+            </figcaption>
+          </figure>
+        </li> -->
+      </ul>
+    </div>
+    <!-- End CONTEST GALLERY -->
+
+    <footer>
+      <p class="text-right">Copyright Alcatel 2014. All rights reserved.</p>
+    </footer>
+
+    <!-- Start DECORATING -->
+    <div class="visible-md-block visible-lg-block">
+      <img src="img/RightPattern.png" style="position: absolute; top: 500px; right: 0;" />
+    </div>
+    <!-- End DECORATING -->
+    </div> <!-- /container -->        <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script> -->
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script type="text/javascript" src="js/filtrr2-0.6.3.min.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/masonry.pkgd.min.js"></script>
+        <script src="js/imagesloaded.pkgd.min.js"></script>
+        <script src="js/classie.js"></script>
+        <script src="js/colorfinder-1.1.js"></script>
+        <script src="js/gridScrollFx.js"></script>
+        <script>
+          new GridScrollFx( document.getElementById( 'grid' ), {
+            viewportFactor : 0.4
+          } );
+          $(document).ready(function() {
+            init();
+            homeInit();
+
+            var name = getCookie("name");
+            if(name !== undefined)
+            {
+              $("#ip-login-register").hide();
+              $("#ip-logout").show();
+            } 
+          });  
+        </script>
+    </body>
+</html>
