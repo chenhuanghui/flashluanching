@@ -1,6 +1,7 @@
 
 /* ==========================================================================
-   Author's custom styles
+   Author'
+    custom styles
    ========================================================================== */
 
 /* FONT */
@@ -421,6 +422,12 @@ footer {
     }
 }
 
+@media (max-width: 479px) {
+    .img-fb-login{
+        width: 250px;
+    }
+}
+
 /* ==========================================================================
    Gallery's styles
    ========================================================================== */
@@ -824,6 +831,13 @@ figure.effect-zoe p.description {
     -webkit-transition: opacity 0.35s;
     transition: opacity 0.35s;
     -webkit-backface-visibility: hidden; /* Fix for Chrome 37.0.2062.120 (Mac) */
+}
+
+figure.effect-zoe p.description a{
+    color: #fff;
+    text-transform: none;
+    text-decoration: none;
+    font-size: 90%;
 }
 
 figure.effect-zoe h2,
