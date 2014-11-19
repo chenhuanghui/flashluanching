@@ -74,6 +74,20 @@ function homeInit(){
         applyFilter('DoutoneYellow');
     });
     $("#image-input").on('change', function(event){loadImg(event);});
+    $("#toStep1").on('click', function(event){
+        var user_id = getCookie("id");   
+        if(user_id === undefined)
+        {
+            $('#loginForm').modal('show');
+        }  
+        else
+        {
+            $("#contest-introduction").hide();
+            $("#step3-section").hide();
+            $("#step2-section").hide();
+            $("#step1-section").show();
+        }        
+    });
     $("#toStep2").on('click', function(event){
         $("#step1-section").hide();
         $("#step3-section").hide();
@@ -83,6 +97,17 @@ function homeInit(){
         $("#step1-section").hide();
         $("#step2-section").hide();
         uploadImage(event);
+    });
+    $("#uploadImage").on('click', function(event){
+        var user_id = getCookie('id');
+        $.get( domain+"image?owner="+user_id+"&sort=createdAt DESC")
+        .done(function(data){
+            console.log("Length: "+data.length);
+            if(data.length > 0)
+            {
+                $(location).attr('href', 'entry.html?id='+data[0].id);
+            }
+        });
     });
     $("#completeUpload").on('click', function(event){
         $("#step1-section").hide();
@@ -156,6 +181,7 @@ function login(e){
             $.post( domain+"info/me?access_token="+data.access_token)
             .done(function(info){
                 setCookie('name', info.name, 30);
+                setCookie('id', info.id, 30);
 
                 $("#ip-login-register").hide();
                 $("#ip-logout").show();

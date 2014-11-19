@@ -333,6 +333,10 @@ img.avatar-sm {
     padding-bottom: 45px;
 }
 
+.step1-section {
+    display:none;
+}
+
 /*.step1-section, */.step2-section, .step3-section {
     padding-top: 90px;
     padding-bottom: 45px;
